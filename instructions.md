@@ -9,10 +9,8 @@ Test: *"Can start a specific number of nodes and users"*
 
 ### 1.1 Spin up nodes
 
-In the [./src/onionRouters/simpleOnionRouter.ts](./src/onionRouters/simpleOnionRouter.ts) file, you should implement a basic express server. Each server should listen to request on a specific port. This port should be defined as the addition of the `BASE_ONION_ROUTER_PORT` (defined in [./src/config.ts](./src/config.ts)) and the `nodeId`.
-
 This basic express server should have a `/status/` HTTP GET route which simply responds with the string `live` when called.
-
+6
 ### 1.2 Spin up users
 
 In the [./src/users/user.ts](./src/users/user.ts) file you should again implement a basic express server. This time the port should be defined as the addition of the `BASE_USER_PORT` (defined in [./src/config.ts](./src/config.ts)) and the `userId`.
