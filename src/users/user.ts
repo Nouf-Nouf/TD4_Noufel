@@ -1,24 +1,29 @@
-import bodyParser from "body-parser";
 import express from "express";
+import bodyParser from "body-parser";
 import { BASE_USER_PORT } from "../config";
 
-export type SendMessageBody = {
-  message: string;
-  destinationUserId: number;
-};
+let lastReceivedMessage: string | null = null;
+let lastSentMessage: string | null = null;
 
 export async function user(userId: number) {
-  const _user = express();
-  _user.use(express.json());
-  _user.use(bodyParser.json());
+  const app = express();
+  app.use(express.json());
+  app.use(bodyParser.json());
 
-  // TODO implement the status route
-  // _user.get("/status", (req, res) => {});
+  app.get("/status", (req, res) => {
+    res.status(200).send("live");
+  });
 
-  const server = _user.listen(BASE_USER_PORT + userId, () => {
-    console.log(
-      `User ${userId} is listening on port ${BASE_USER_PORT + userId}`
-    );
+  app.get("/getLastReceivedMessage", (req, res) => {
+    res.status(200).json({ result: lastReceivedMessage });
+  });
+
+  app.get("/getLastSentMessage", (req, res) => {
+    res.status(200).json({ result: lastSentMessage });
+  });
+
+  const server = app.listen(BASE_USER_PORT + userId, () => {
+    console.log(`User ${userId} listening on port ${BASE_USER_PORT + userId}`);
   });
 
   return server;
