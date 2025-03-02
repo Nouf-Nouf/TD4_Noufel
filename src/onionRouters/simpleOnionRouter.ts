@@ -2,13 +2,15 @@ import bodyParser from "body-parser";
 import express from "express";
 import { BASE_ONION_ROUTER_PORT } from "../config";
 
-let lastReceivedEncryptedMessage: string | null = null;
-let lastReceivedDecryptedMessage: string | null = null;
-let lastMessageDestination: number | null = null;
-let lastReceivedMessage: string | null = null;
-let lastSentMessage: string | null = null;
 
 export async function simpleOnionRouter(nodeId: number) {
+
+  let lastReceivedEncryptedMessage: string | null = null;
+  let lastReceivedDecryptedMessage: string | null = null;
+  let lastMessageDestination: number | null = null;
+  let lastReceivedMessage: string | null = null;
+  let lastSentMessage: string | null = null;
+
   const onionRouter = express();
   onionRouter.use(express.json());
   onionRouter.use(bodyParser.json());
@@ -36,6 +38,8 @@ export async function simpleOnionRouter(nodeId: number) {
   onionRouter.get("/getLastSentMessage", (req, res) => {
     res.status(200).json({ result: lastSentMessage });
   });
+
+  
 
   const server = onionRouter.listen(BASE_ONION_ROUTER_PORT + nodeId, () => {
     console.log(
