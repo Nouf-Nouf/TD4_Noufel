@@ -2,7 +2,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import { BASE_USER_PORT } from "../config";
 
-
 let lastReceivedMessage: string | null = null;
 let lastSentMessage: string | null = null;
 
