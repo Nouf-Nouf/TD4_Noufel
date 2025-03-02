@@ -26,7 +26,7 @@ export async function simpleOnionRouter(nodeId: number) {
   onionRouter.use(bodyParser.json());
 
   onionRouter.get("/status", (req, res) => {
-    res.status(200).send("live");
+    res.send("live");
   });
 
   onionRouter.get("/getLastReceivedEncryptedMessage", (req, res) => {

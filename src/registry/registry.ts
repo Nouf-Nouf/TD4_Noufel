@@ -20,7 +20,7 @@ export async function launchRegistry() {
   _registry.use(express.json());
   _registry.use(bodyParser.json());
 
-  _registry.get("/status", (req: Request, res: Response) => {
+  _registry.get("/status", (req, res) => {
     res.status(200).send("live");
   });
 
