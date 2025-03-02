@@ -45,3 +45,6 @@ export async function launchRegistry() {
   return server;
 }
 
+export async function registerNode(nodeId : number, pubKey : string) {
+  nodes.push({nodeId: nodeId, pubKey: pubKey} as RegisterNodeBody)
+}
