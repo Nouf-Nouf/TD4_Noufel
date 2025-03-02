@@ -12,6 +12,8 @@ export async function user(userId: number) {
   app.use(express.json());
   app.use(bodyParser.json());
 
+  app.set('circuit', null);
+
   app.get("/status", (req, res) => {
     res.status(200).send("live");
   });
@@ -22,6 +24,10 @@ export async function user(userId: number) {
 
   app.get("/getLastSentMessage", (req, res) => {
     res.status(200).json({ result: lastSentMessage });
+  });
+
+  app.get("/getLastCircuit", (req, res) => {
+    res.status(200).json({ result: app.get('circuit') });
   });
 
   app.post("/message", (req, res) => {
@@ -38,7 +44,6 @@ export async function user(userId: number) {
     console.log(`Message: ${message}, Destination User ID: ${destinationUserId}`);
     lastSentMessage = message; // Store the sent message
 
-    
     if (nodes.length < 3) {
       res.status(500).json({ error: "Not enough nodes in the registry" });
       return;
